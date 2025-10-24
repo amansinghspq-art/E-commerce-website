@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BuyNexus | Shop Smart</title>
+  
+
+
+
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #e6e9f0, #fefefe);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+  
+    .navbar {
+      backdrop-filter: blur(10px);
+      background: rgba(34, 34, 34, 0.85);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+    }
+
+    .logo i {
+      color: #1e90ff;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 30px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px 45px 10px 15px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .search-bar i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-weight: 600;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: #1e90ff;
+    }
+
+    
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 25px 20px;
+      background-color: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-top: 10px;
+      border-radius: 15px;
+      max-width: 1100px;
+      margin-inline: auto;
+    }
+
+    .category-item {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #333;
+      cursor: pointer;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .category-item:hover {
+      transform: translateY(-5px);
+      color: #1e90ff;
+    }
+
+    .category-item img {
+      height: 55px;
+      width: 55px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+  
+    .products-section {
+      padding: 50px 60px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 35px;
+      color: #222;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 35px;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      border-bottom: 1px solid #eee;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .product-info .price {
+      color: #1e90ff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .myButton {
+      background-color: #1e90ff;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .myButton:hover {
+      background-color: #0078e7;
+      transform: scale(1.05);
+    }
+.myButton:focus { outline: 2px solid #1e90ff; outline-offset: 2px; }
+
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 20px;
+      }
+
+      .search-bar {
+        max-width: 100%;
+        margin: 0;
+      }
+
+      .products-section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fa-solid fa-bag-shopping"></i> BuyNexus
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search for Products, Brands and More">
+      <i class="fa fa-search"></i>
+    </div>
+
+    <div class="nav-menu">
+      <a href="#"><i class="fa fa-user"></i> Login</a>
+    
+      <a href="#"><i class="fa fa-store"></i> Sell on BuyNexus</a>
+        <a href="#about" class="about-link">About</a>
+    </div>
+    
+  </nav>
+
+  
+  <section class="categories">
+    <div class="category-item"><img src="iphone.jpg" alt="Mobiles"><p>Mobiles</p></div>
+    <div class="category-item"><img src="earbud.jpg" alt="Electronics"><p>Electronics</p></div>
+    <div class="category-item"><img src="hp vectus.jpg" alt="Laptops"><p>Laptops</p></div>
+
+    
+  </section>
+
+  
+  <section class="products-section">
+    <h2 class="section-title">Trending Products</h2>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="iphone.jpg" alt="iPhone">
+        <div class="product-info">
+          <h3>iPhone 15</h3>
+          <div class="price">₹70,000</div>
+          <a href="index2.html" class="myButton">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="placeholder-image-large.jpg" alt="Headphones">
+        <div class="product-info">
+          <h3>Headphones</h3>
+          <div class="price">₹2,500</div>
+          <a href="index.html" class="myButton">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="hp vectus.jpg" alt="HP Vectus Laptop">
+        <div class="product-info">
+          <h3>HP Vectus Laptop</h3>
+          <div class="price">₹85,000</div>
+          <a href="index3.html" class="myButton">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="earbud.jpg" alt="Ear Bud">
+        <div class="product-info">
+          <h3>Boat Earbuds</h3>
+          <div class="price">₹3,000</div>
+          <a href="index4.html" class="myButton">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="about" style="padding:50px 20px; background:#f4f6f8; text-align:center;">
+  <h2 style="font-size:2rem; color:#1e90ff;">About BuyNexus</h2>
+  <p style="max-width:700px; margin:auto; font-size:1.1rem; color:#333; line-height:1.6;">
+    Welcome to <strong>BuyNexus</strong> – your ultimate destination for smart shopping! 
+    Discover the latest electronics, gadgets, and lifestyle products at unbeatable prices. 
+    We bring you quality, variety, and convenience all in one place. 
+    Experience hassle-free shopping and get your favorite products delivered right to your doorstep!
+  </p>
+</section>
+
+
+  
+  <script src="https://unpkg.com/@studio-freight/lenis"></script>
+  <script>
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  </script>
+
+  
+  <script src="script.js">
+     
+    
+
+  </script>
+</body>
+</html>

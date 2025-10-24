@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .myButton{
+            background-color: green;
+                color: white;
+                padding: 30px 40px;
+                border: none;
+                border-radius: 5px;
+                cursor: point;
+            }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I PHONE - Product Detail</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">BuyNexus</div>
+        <nav class="nav-links">
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+            <a href="cart.html">Cart (0)</a>
+
+        </nav>
+    </header>
+
+    <div class="product-container">
+        <section class="product-gallery">
+            <div class="main-image">
+                <img id="mainProductImage" src="iphone.jpg" alt="High-quality wireless headphones">
+            </div>
+            <div class="thumbnail-images">
+                <img src="iphone.jpg" alt="Side view" data-src="" class="active-thumb">
+                <img src="iphone.jpg" alt="Case view" data-src="">
+                <img src="iphone.jpg" alt="Colors view" data-src="">
+            </div>
+        </section>
+
+        <section class="product-details">
+            <h1 class="product-title">i phone</h1>
+            <div class="rating">
+                ★★★★★ <span class="review-count">(4500 Reviews)</span>
+            </div>
+
+            <div class="price-section">
+                <span class="current-price">RS-70000</span>
+                <span class="original-price">RS-75090</span>
+            </div>
+
+            <p class="product-description">
+                Experience crystal-clear audio with 30 hours of battery life. Our industry-leading noise cancellation technology ensures a focused and immersive listening experience.
+            </p>
+
+            <div class="product-options">
+                <div class="option-group">
+                    <label for="color">Color:</label>
+                    <select id="color">
+                        <option> Black</option>
+                        <option> White</option>
+                        <option> Blue</option>
+                    </select>
+                </div>
+                
+                <div class="option-group">
+                    <label for="quantity">Quantity:</label>
+                    <div class="quantity-control">
+                        <button id="decrement">-</button>
+                        <input type="number" id="quantity" value="1" min="1" max="10" readonly>
+                        <button id="increment">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="add-to-cart">Add to Cart</button>
+                <a href="iphoneorder.html"><button class="myButton">Buy Now</button></a>
+            </div>
+            
+            <div class="shipping-info">
+                <p>📦 *Free Shipping* on orders over $100.</p>
+                <p>✅ 30-Day Money-Back Guarantee.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        &copy; 2025 EcomClone Inc. All rights reserved.
+    </footer>
+
+   
+   <script>
+// --- CART UTILITIES ---
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem('cart')) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateCartCount() {
+  const cart = getCart();
+  const count = cart.reduce((acc, item) => acc + (item.qty || 0), 0);
+  const cartLink = document.querySelector('.nav-links a[href="cart.html"]');
+  if (cartLink) cartLink.textContent = `Cart (${count})`;
+}
+
+// --- INITIALIZE CART COUNT ON LOAD ---
+updateCartCount();
+
+// --- IMAGE SWITCHER ---
+document.querySelectorAll('.thumbnail-images img').forEach(img => {
+  img.addEventListener('click', () => {
+    document.getElementById('mainProductImage').src = img.dataset.src;
+    document.querySelectorAll('.thumbnail-images img').forEach(i => i.classList.remove('active-thumb'));
+    img.classList.add('active-thumb');
+  });
+});
+
+// --- QUANTITY CONTROL ---
+const qtyInput = document.getElementById('quantity');
+document.getElementById('increment').onclick = () => {
+  if (qtyInput.value < 10) qtyInput.value++;
+};
+document.getElementById('decrement').onclick = () => {
+  if (qtyInput.value > 1) qtyInput.value--;
+};
+
+// --- ADD TO CART FUNCTIONALITY ---
+document.querySelector('.add-to-cart').addEventListener('click', () => {
+  const cart = getCart();
+
+  const product = {
+    id: "iphone-15",
+    name: "iPhone 15",
+    price: 70000,
+    color: document.getElementById('color').value,
+    qty: parseInt(document.getElementById('quantity').value)
+};
+
+  // Check if product already exists in cart
+  const existing = cart.find(item => item.id === product.id && item.color === product.color);
+  if (existing) {
+    existing.qty += product.qty;
+  } else {
+    cart.push(product);
+  }
+
+  saveCart(cart);
+  updateCartCount();
+
+  alert(`${product.qty} × ${product.name} added to cart!`);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Confirmation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 { color: #27ae60; font-size: 26px; }
+    .section-title {
+      border-bottom: 1px solid #ddd;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    table th, table td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .totals { text-align: right; }
+    .totals td { font-weight: bold; }
+    .myButton{
+      background-color: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .myButton:hover { background: darkgreen; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>✅ Thank you for your purchase, Aman Singh!</h1>
+  <p>Your order has been placed successfully. Below are the details:</p>
+  <div class="section-title">🧾 Order Summary</div>
+    <div class="info-box">
+      <p><span class="highlight">Order Number:</span> #123457</p>
+      <p><span class="highlight">Payment Method:</span> Visa ending in 1234</p>
+      <p><span class="highlight">Shipping Method:</span> Standard Shipping (3–5 business days)</p>
+      <p><span class="highlight">Order Status:</span> Processing</p>
+    </div>
+
+
+  <div class="section-title">📦 Items Ordered</div>
+  <table id="orderTable">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>I PHONE</td>
+        <td><input type="number" value="1" min="0" class="qty"></td>
+        <td class="price">70000</td>
+        <td class="total"></td>
+      </tr>
+    </tbody>
+    <tfoot class="totals">
+      <tr>
+        <td colspan="3">Subtotal</td>
+        <td id="subtotal">94.47</td>
+      </tr>
+      <tr>
+        <td colspan="3">Shipping</td>
+        <td id="shipping">50</td>
+      </tr>
+      <tr>
+        <td colspan="3">Tax (8%)</td>
+        <td id="tax">7.56</td>
+      </tr>
+      <tr>
+        <td colspan="3">Total</td>
+        <td><strong id="grandTotal">108.02</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <a href="pay.html"><button class="myButton">Payment</button></a><br>
+  <br>
+  <form>
+    <div>
+    <textarea id="address" name="address"  rows="5" cols="105" required placeholder="Write Your Address Here....."></textarea>
+    </div>
+  </form>
+  <div class="section-title">📧 Confirmation Sent To</div>
+    <div class="info-box">
+      <p><strong>Email:</strong> amansingh@gmail.com</p>
+    </div>
+
+    <div class="section-title">🕓 What's Next?</div>
+    <p>You will receive a shipping confirmation email with tracking details once your items are on the way.</p>
+    <p>You can track your order anytime from your <a href="#">account dashboard</a>.</p>
+
+    <div class="footer">
+      Need help? Contact support at <a href="mailto:support@yourstore.com">support@yourstore.com</a> or call 📞 1-800-555-1234
+    </div>
+  </div>
+</div>
+
+<script>
+function calculateTotals() {
+  let rows = document.querySelectorAll("#orderTable tbody tr");
+  let subtotal = 0;
+
+  rows.forEach(row => {
+    let qty = parseFloat(row.querySelector(".qty").value);
+    let price = parseFloat(row.querySelector(".price").textContent);
+    let total = qty * price;
+    row.querySelector(".total").textContent = total.toFixed(2);
+    subtotal += total;
+  });
+
+  let shipping = 5.99; 
+  let tax = subtotal * 0.08; // 8% tax
+  let grandTotal = subtotal + shipping + tax;
+
+  document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+  document.getElementById("tax").textContent = tax.toFixed(2);
+  document.getElementById("grandTotal").textContent = grandTotal.toFixed(2);
+}
+
+calculateTotals();
+
+document.querySelectorAll(".qty").forEach(input => {
+  input.addEventListener("input", calculateTotals);
+});
+</script>
+</body>
+</html>

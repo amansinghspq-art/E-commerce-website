@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmation | BuyNexus</title>
+<style>
+body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f4f6f8; margin:0; padding:0;}
+.container {max-width:800px; margin:40px auto; background:white; padding:30px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+h1 {color:#27ae60;}
+table {width:100%; border-collapse:collapse; margin-top:20px;}
+th, td {padding:10px; border-bottom:1px solid #eee;}
+.totals {text-align:right; font-weight:bold;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>✅ Thank you for your purchase!</h1>
+  <p>Your order has been placed successfully. Details below:</p>
+
+  <table id="orderTable">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Color</th>
+        <th>Qty</th>
+        <th>Price (₹)</th>
+        <th>Total (₹)</th>
+      </tr>
+    </thead>
+    <tbody id="orderItems"></tbody>
+    <tfoot class="totals">
+      <tr><td colspan="4">Subtotal</td><td id="subtotal">0</td></tr>
+      <tr><td colspan="4">Shipping</td><td id="shipping">50</td></tr>
+      <tr><td colspan="4">Tax (8%)</td><td id="tax">0</td></tr>
+      <tr><td colspan="4">Grand Total</td><td id="grandTotal">0</td></tr>
+    </tfoot>
+  </table>
+
+  <p>🕓 You will receive a confirmation email shortly.</p>
+</div>
+
+<script src="script.js"></script>
+<script>
+function loadOrder() {
+  const cart = getCart();
+  if (!cart || cart.length === 0) return;
+
+  const tbody = document.getElementById('orderItems');
+  tbody.innerHTML = '';
+
+  let subtotal = 0;
+  cart.forEach(item => {
+    const total = item.qty * item.price;
+    subtotal += total;
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${item.name}</td><td>${item.color}</td><td>${item.qty}</td><td>${item.price.toFixed(2)}</td><td>${total.toFixed(2)}</td>`;
+    tbody.appendChild(row);
+  });
+
+  const shipping = 50;
+  const tax = subtotal * 0.08;
+  const grandTotal = subtotal + shipping + tax;
+
+  document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+  document.getElementById('tax').textContent = tax.toFixed(2);
+  document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+  document.getElementById('shipping').textContent = shipping.toFixed(2);
+
+  localStorage.removeItem('cart'); // Clear cart after order
+}
+
+document.addEventListener('DOMContentLoaded', loadOrder);
+</script>
+</body>
+</html>

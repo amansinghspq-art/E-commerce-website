@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart | BuyNexus</title>
+<style>
+body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f6f8; margin:0; padding:0;}
+.container {max-width:900px; margin:40px auto; background:white; padding:30px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+h1 {color: #27ae60;}
+table {width:100%; border-collapse:collapse; margin-top:20px;}
+th, td {padding:10px; border-bottom:1px solid #eee;}
+.totals {text-align:right; font-weight:bold;}
+input.qty {width:50px; text-align:center;}
+.remove-btn {background:red; color:white; border:none; border-radius:5px; padding:5px 10px; cursor:pointer;}
+.remove-btn:hover {background:darkred;}
+.myButton {background:green; color:white; padding:12px 25px; border:none; border-radius:5px; cursor:pointer; text-decoration:none; display:inline-block; margin-top:20px;}
+.myButton:hover {background:darkgreen;}
+.empty {text-align:center; color:#777; margin:20px 0;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🛒 Your Cart</h1>
+
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Color</th>
+        <th>Qty</th>
+        <th>Price (₹)</th>
+        <th>Total (₹)</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody id="cartItems"></tbody>
+    <tfoot class="totals">
+      <tr><td colspan="4">Subtotal</td><td id="subtotal">0</td><td></td></tr>
+      <tr><td colspan="4">Shipping</td><td id="shipping">50</td><td></td></tr>
+      <tr><td colspan="4">Tax (8%)</td><td id="tax">0</td><td></td></tr>
+      <tr><td colspan="4">Grand Total</td><td id="grandTotal">0</td><td></td></tr>
+    </tfoot>
+  </table>
+
+  <div id="emptyCartMsg" class="empty" style="display:none;">
+    🛒 Your cart is empty. Go back to <a href="index.html">Shop</a>.
+  </div>
+
+  <a href="orderconfirmation.html" class="myButton">Proceed to Checkout</a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
